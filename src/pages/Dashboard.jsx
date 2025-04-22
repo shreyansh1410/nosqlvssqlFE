@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function Dashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState({ username: '', password: '' });
@@ -15,7 +17,7 @@ export default function Dashboard() {
         const payload = JSON.parse(atob(token.split('.')[1]));
         const { email, dbType } = payload;
         const { data } = await axios.get(
-          "http://localhost:5000/api/auth/userinfo",
+          `${BACKEND_URL}/api/auth/userinfo`,
           {
             headers: { Authorization: `Bearer ${token}` },
             withCredentials: true

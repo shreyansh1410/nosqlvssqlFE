@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function AccountActions() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +16,7 @@ export default function AccountActions() {
     setMessage("");
     setError("");
     try {
-      await axios.post("http://localhost:5000/api/account/request-update", {
+      await axios.post(`${BACKEND_URL}/api/account/request-update`, {
         username,
         password,
         token: localStorage.getItem("token"),
@@ -31,7 +33,7 @@ export default function AccountActions() {
     setMessage("");
     setError("");
     try {
-      await axios.post("http://localhost:5000/api/account/request-delete", {
+      await axios.post(`${BACKEND_URL}/api/account/request-delete`, {
         email,
         token: localStorage.getItem("token"),
       });

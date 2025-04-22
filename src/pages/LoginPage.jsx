@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +17,7 @@ export default function LoginPage() {
     try {
       // Backend endpoint will handle both SQL and NoSQL login
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${BACKEND_URL}/api/auth/login`,
         { email, password, dbType }
       );
       localStorage.setItem("token", data.token);
